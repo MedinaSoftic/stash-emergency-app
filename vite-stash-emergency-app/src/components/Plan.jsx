@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {useParams} from 'react-router';
 import HomePage from "./HomePage";
 import { supplies } from "./Data";
@@ -25,6 +25,7 @@ export default function Plan() {
     
     const supplyList = supplies.map(items => 
         <li key={items.id}><p>{items.supply}</p></li>)
+
 
     return(
         <>
