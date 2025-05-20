@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {useParams} from 'react-router';
 import HomePage from "./HomePage";
-import { supplies } from "./Data";
+import { suppliesTornado,suppliesEartquake, suppliesWildfire  } from "./Data";
 
 
 export default function Plan() {
-    let [userListInput, setUserListInput] = useState({
-        add: "",
+    const [userListInput, setUserListInput] = useState({
+        customListItem: "",
         email: ""
     })
 
+    const [disaster, setDisaster] = useState('Select from the dropdown');
+    const [newSupplies, setNewSupplies] = useState({
+        Tornadoes: [],
+        Earthquakes: [],
+        WildFires: [],
+    });
 
     const handleChange = (e) => {
         const{name, value} = e.target;
@@ -20,12 +26,38 @@ export default function Plan() {
                 [name]:value
             }
         })
-    }
-    
-    
-    const supplyList = supplies.map(items => 
-        <li key={items.id}><p>{items.supply}</p></li>)
+    };
+    const addSupply = () => {
+        const trimText = userListInput.customListItem.trim();
+        if (!trimText || !disaster) return;
 
+        const newItem = {id: Date.now(), supply: trimText};
+        setNewSupplies(prev => ({
+            ...prev,
+            [disaster]: [...prev[disaster], newItem]
+        }))
+        setUserListInput(prev => ({...prev, customListItem: ""}));
+    };
+    
+
+
+    const getList = {
+        Tornadoes: suppliesTornado,
+        Earthquakes: suppliesEartquake,
+        WildFires: suppliesWildfire,
+    };
+
+    const builtInList = getList[disaster] || [];
+    const addToList = newSupplies[disaster] || [];
+
+    const renderList = [...builtInList, ...addToList].map((item)=> (
+        <li key={`${item.id}${item.supply}`}>
+            <p>{item.supply}</p>
+        </li>
+    )) || null;   
+    
+
+    
 
     return(
         <>
@@ -33,30 +65,32 @@ export default function Plan() {
             <h1>Here we can help you Plan for Natural Disasters.</h1>
                 <h2>Below use the Drop Down to select the disaster you would like to plan for.</h2>
         </div>
+        <form>
         <div>
-            <select>
-                <option>Select from the list below</option>
-                <option>Tornadoes</option>
-                <option>Earthquakes</option>
-                <option>Wildfires</option>
+            <select value={disaster}
+                onChange={e => setDisaster(e.target.value)}>
+                <option value="">Select from the list below</option>
+                <option value="Tornadoes" >Tornadoes</option>
+                <option value="Earthquakes">Earthquakes</option>
+                <option value="WildFires">Wildfires</option>
             </select>
-            <button>Search List</button>
         </div>
+        </form>
         <div className="supplyData">
-            <ul>{supplyList}</ul>
+            <ul>{renderList}</ul>
         </div>
+        <form>
             <h3>Add Your Own Items To The List!</h3>
-    
-            <form>
                 <div className="addToList">
                     <label>
                     <input
                     placeholder='Enter Your Ideas...'
                     text="text"
-                    value={userListInput.add}
+                    value={userListInput.customListItem}
                     onChange={handleChange}
-                    name="add"
+                    name="customListItem"
                     />
+                    <button type="Button" onClick={addSupply}>Add</button>
                     </label>
                     <br/>
                 </div>
@@ -67,7 +101,7 @@ export default function Plan() {
                     <label>
                     <input
                     placeholder='Enter Your Email...'
-                    text="email"
+                    type="email"
                     value={userListInput.email}
                     onChange={handleChange}
                     name="email"
@@ -75,7 +109,6 @@ export default function Plan() {
                     </label>
                 </div>
             </form>
-   
         </>
     )
 }
