@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {useParams} from 'react-router';
+import {Link} from 'react-router';
+import LinkButton from "./LinkButton";
 import HomePage from "./HomePage";
-import { suppliesTornado,suppliesEartquake, suppliesWildfire  } from "./Data";
+import { suppliesTornado, suppliesEartquake, suppliesWildfire  } from "./Data";
 
 
 export default function Plan() {
@@ -115,6 +116,11 @@ export default function Plan() {
             </div>
         </form>
         )}
+            <div>
+            <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgAlt="Home Button"/>
+            <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="src/img/contactButton.png" imgAlt="Contact Button"/>
+            <LinkButton to="/about" btnClass= "aboutBtn" label="About" imgClass="contactImg" imgSrc="src/img/aboutButton.png" imgAlt="About button"/>
+        </div>
         </div>
         </>
     )
