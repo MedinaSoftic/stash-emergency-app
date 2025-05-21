@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {useParams} from 'react-router';
 import HomePage from "./HomePage";
 import { suppliesTornado,suppliesEartquake, suppliesWildfire  } from "./Data";
@@ -10,7 +10,7 @@ export default function Plan() {
         email: ""
     })
 
-    const [disaster, setDisaster] = useState('Select from the dropdown');
+    const [disaster, setDisaster] = useState("");
     const [newSupplies, setNewSupplies] = useState({
         Tornadoes: [],
         Earthquakes: [],
@@ -27,6 +27,7 @@ export default function Plan() {
             }
         })
     };
+    
     const addSupply = () => {
         const trimText = userListInput.customListItem.trim();
         if (!trimText || !disaster) return;
@@ -39,7 +40,6 @@ export default function Plan() {
         setUserListInput(prev => ({...prev, customListItem: ""}));
     };
     
-
 
     const getList = {
         Tornadoes: suppliesTornado,
@@ -56,8 +56,11 @@ export default function Plan() {
         </li>
     )) || null;   
     
-
-    
+    useEffect(() => {
+        if(disaster && disaster !== "Select form the dropdown") {
+            console.log("add and email is now visable")
+        }
+    }, [disaster])
 
     return(
         <>
@@ -79,36 +82,40 @@ export default function Plan() {
         <div className="supplyData">
             <ul>{renderList}</ul>
         </div>
-        <form>
+        <div>
+            {disaster != "" && (
+            <form>
             <h3>Add Your Own Items To The List!</h3>
-                <div className="addToList">
-                    <label>
+            <div className="addToList">
+                <label>
                     <input
-                    placeholder='Enter Your Ideas...'
-                    text="text"
-                    value={userListInput.customListItem}
-                    onChange={handleChange}
-                    name="customListItem"
+                        placeholder='Enter Your Ideas...'
+                        text="text"
+                        value={userListInput.customListItem}
+                        onChange={handleChange}
+                        name="customListItem"
                     />
-                    <button type="Button" onClick={addSupply}>Add</button>
-                    </label>
-                    <br/>
-                </div>
-                <div>
-                    <br/>
+                        <button type="Button" onClick={addSupply}>Add</button>
+                </label>
+                <br/>
+            </div>
+            <div>
+                <br/>
                     <h3>Would you like to email this list?</h3>
                     <h3>Add your email below, you will receieve your email soon!</h3>
-                    <label>
+                <label>
                     <input
-                    placeholder='Enter Your Email...'
-                    type="email"
-                    value={userListInput.email}
-                    onChange={handleChange}
-                    name="email"
+                        placeholder='Enter Your Email...'
+                        type="email"
+                        value={userListInput.email}
+                        onChange={handleChange}
+                        name="email"
                     />
-                    </label>
-                </div>
-            </form>
+                </label>
+            </div>
+        </form>
+        )}
+        </div>
         </>
     )
 }
