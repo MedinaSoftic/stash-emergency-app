@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router';
-import LinkButton from "./LinkButton";
-import HomePage from "./HomePage";
+import LinkButton from "../LinkButton";
+import HomePage from "../HomePage";
+import './Plan.css'
 import { suppliesTornado, suppliesEartquake, suppliesWildfire  } from "./Data";
 
 
 export default function Plan() {
     const [userListInput, setUserListInput] = useState({
         customListItem: "",
+    })
+        const [userForm, setUserForm] = useState({
+        firstName: "",
+        lastName: "",
         email: ""
     })
+
+    
 
     const [disaster, setDisaster] = useState("");
     const [newSupplies, setNewSupplies] = useState({
         Tornadoes: [],
         Earthquakes: [],
-        WildFires: [],
+        Wildfires: [],
     });
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
 
     const handleChange = (e) => {
         const{name, value} = e.target;
@@ -45,7 +55,7 @@ export default function Plan() {
     const getList = {
         Tornadoes: suppliesTornado,
         Earthquakes: suppliesEartquake,
-        WildFires: suppliesWildfire,
+        Wildfires: suppliesWildfire,
     };
 
     const builtInList = getList[disaster] || [];
@@ -63,6 +73,26 @@ export default function Plan() {
         }
     }, [disaster])
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+            setUserForm(prevState => ({ ...prevState, [name]: value }));
+            
+        }
+
+    const isFormComplete = userForm.firstName && userForm.lastName && userForm.email;
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+            setIsSubmitting(true);
+
+        setTimeout(() => {
+            alert('Form submitted!');
+            setIsSubmitting(false);
+        }, 2000);
+    };
+
+
     return(
         <>
         <div>
@@ -70,33 +100,40 @@ export default function Plan() {
                 <h2>Below use the Drop Down to select the disaster you would like to plan for.</h2>
         </div>
         <form>
-        <div>
-            <select value={disaster}
+        <div >
+            <select className="dropdown" value={disaster}
                 onChange={e => setDisaster(e.target.value)}>
                 <option value="">Select from the list below</option>
                 <option value="Tornadoes" >Tornadoes</option>
                 <option value="Earthquakes">Earthquakes</option>
-                <option value="WildFires">Wildfires</option>
+                <option value="Wildfires">Wildfires</option>
             </select>
         </div>
         </form>
-        <div className="supplyData">
-            <ul>{renderList}</ul>
-        </div>
+
         <div>
+        <div className="supplyData">
+            <ul className="listDataStyle">{renderList}</ul>
+        </div>
+
+        </div>
+        <div className="formInPlan">
             {disaster != "" && (
-            <form>
+            <form onSubmit={handleSubmit}>
             <h3>Add Your Own Items To The List!</h3>
             <div className="addToList">
                 <label>
                     <input
                         placeholder='Enter Your Ideas...'
+                        type="text"
                         text="text"
                         value={userListInput.customListItem}
                         onChange={handleChange}
                         name="customListItem"
                     />
-                        <button type="Button" onClick={addSupply}>Add</button>
+                    <div>
+                        <button className="planPgBtns" type="Button" onClick={addSupply}>Add</button>
+                    </div>
                 </label>
                 <br/>
             </div>
@@ -105,13 +142,33 @@ export default function Plan() {
                     <h3>Would you like to email this list?</h3>
                     <h3>Add your email below, you will receieve your email soon!</h3>
                 <label>
+                    <div className="inputbox">
+                    <input
+                        placeholder='First Name...'
+                        type="text"
+                        value={userForm.firstName}
+                        onChange={handleInputChange}
+                        name="firstName"
+                    /></div>
+                    <div className="inputbox">
+                    <input
+                        placeholder='Last Name...'
+                        type="text"
+                        value={userForm.lastName}
+                        onChange={handleInputChange}
+                        name="lastName"
+                    /></div>
+                    <div className="inputbox">
                     <input
                         placeholder='Enter Your Email...'
                         type="email"
-                        value={userListInput.email}
-                        onChange={handleChange}
+                        value={userForm.email}
+                        onChange={handleInputChange}
                         name="email"
-                    />
+                    /></div>
+                    <button className="planPgBtnsdisable" type="submit" disabled={!isFormComplete || isSubmitting}>
+                        {isSubmitting ? 'Submitting...' : 'Submit'}
+                    </button>
                 </label>
             </div>
         </form>

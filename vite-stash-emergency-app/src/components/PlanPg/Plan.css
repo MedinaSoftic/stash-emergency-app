@@ -1,0 +1,81 @@
+.planPgBtns,
+.planPgBtnsdisable{
+  cursor: pointer;
+  text-align: center;
+  width: 150px;
+  height: 20px;
+  color: #fff;
+  background-color: #3e8e41;
+  border: none; 
+  border-radius: 15px;
+  box-shadow: 0 2px #999;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.planPgBtns:hover {background-color: #3e8e41}
+
+.planPgBtns:active{
+  background-color: #acd08e;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+.planPgBtnsdisable:disabled{
+  background-color: #acd08e;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+.supplyData {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 63px;
+  justify-content: center;
+  
+}
+
+.listDataStyle{
+  width: fit-content;
+}
+
+.dropdown{
+    width: 220px;
+}
+
+.listDataStyle li {
+  flex: auto;
+  font-size: 18px;
+  list-style-type: decimal;
+  text-align: left;
+  padding: 10px;
+}
+
+.formInPlan{
+  padding-bottom: 10px;
+}
+
+.inputbox{
+  margin: 2%;
+}
+
+input[type=text], select {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=email], select {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
