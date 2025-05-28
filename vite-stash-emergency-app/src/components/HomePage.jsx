@@ -18,9 +18,9 @@ return(
                 useful resources below! 
         </div>
         <div>
-            <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/planButton.png" imgAlt="Plan Button"/>
-            <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="src/img/contactButton.png" imgAlt="Contact Button"/>
-            <LinkButton to="/about" btnClass= "aboutBtn" label="About" imgClass="contactImg" imgSrc="src/img/aboutButton.png" imgAlt="About button"/>
+            <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/planButton.png" imgalt="Plan Button"/>
+            <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="src/img/contactButton.png" imgalt="Contact Button"/>
+            <LinkButton to="/about" btnClass= "aboutBtn" label="About" imgClass="aboutImg" imgSrc="src/img/aboutButton.png" imgalt="About button"/>
         </div>
     </>
     )

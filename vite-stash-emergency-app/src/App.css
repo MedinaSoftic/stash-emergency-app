@@ -13,10 +13,13 @@
 
 .containerLogo{
   display: grid;
+  flex-shrink: inherit;
   align-items: center;
-  grid-template-columns: 1fr, 1fr, 1fr;
-  column-gap: 5px;
-  background-color: rgba(214, 214, 205);
+  background-color: rgb(32, 84, 147);
+  height: 200px;
+  font-weight: bold;
+  max-height: 180px;
+  overflow: hidden;
 }
 
 .widget{
@@ -31,7 +34,7 @@
 }
 
 ::-webkit-scrollbar-track{
-  background-color: rgb(34, 108, 204);
+  background-color: rgb(32, 84, 147);
 }
 
 ::-webkit-scrollbar-thumb{

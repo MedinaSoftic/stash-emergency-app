@@ -1,13 +1,14 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as SlIcon from "react-icons/sl";
-import * as IoIcon from "react-icons/io" 
+import * as IoIcon from "react-icons/io";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FcAbout } from "react-icons/fc";
+import { IoInformationCircle } from "react-icons/io5";
 
 
 
-export const SidebarData = [
+export const NavbarData = [
     {
         title: 'Home',
         path: '/',
@@ -23,13 +24,13 @@ export const SidebarData = [
         {
         title: 'Contact',
         path: '/contact',
-        icon: <FaIcons.FaPhoneSquareAlt />,
+        icon: <FaIcons.FaPhoneSquareAlt/>,
         cName: 'nav-text'
     },
         {
         title: 'About',
         path: '/about',
-        icon: <FcAbout />,
+        icon: <IoInformationCircle/>,
         cName: 'nav-text'
     }
 ]

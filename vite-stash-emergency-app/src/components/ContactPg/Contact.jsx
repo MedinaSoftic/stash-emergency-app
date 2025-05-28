@@ -4,6 +4,9 @@ import ContactCard from "./ContactCard"
 import LinkButton from "../LinkButton"
 import "./Card.css"
 
+
+
+//Contact card logic pased in by props
 export default function Contact() {
 
     return (
@@ -46,18 +49,18 @@ export default function Contact() {
                             </div>
                             <div className="back">
                                 <ContactCard title="Red Cross" number="1-800-733-2767" email="customercare@redcross.org" mail="430 17th Street, NW, Washington, DC 20006"></ContactCard>
-                                <p>Red Cross can help with the reunification of Family in the US and US Territories, after a natural disaster. For guidence visit their <a href="https://www.redcross.org/get-help/disaster-relief-and-recovery-services/contact-and-locate-loved-ones.html">Contact Loved Ones</a> page.</p>
+                                <p>Red Cross can help with the reunification of Family in the US and US Territories, after a natural disaster. For guidence visit their <a href="https://www.redcross.org/get-help/disaster-relief-and-recovery-services/contact-and-locate-loved-ones.html">Contact Loved Ones.</a></p>
                                 <p></p>
                             </div>
                         </div>
                     </div>
                     <div className="containerFrame"> 
-                    <iframe className="responsiveFrame" width="560" height="315" src="https://www.youtube.com/embed/l3GJqNX5x9M?si=_OYDT6U1ObbHwFyO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe className="responsiveFrame" width="560" height="315" src="https://www.youtube.com/embed/l3GJqNX5x9M?si=_OYDT6U1ObbHwFyO" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
                     </div>
                 </div>
-                <LinkButton to="/" btnClass="homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgAlt="Home Button" />
-                <LinkButton to="/plan" btnClass="planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/contactButton.png" imgAlt="Plan Button" />
-                <LinkButton to="/about" btnClass="aboutBtn" label="About" imgClass="contactImg" imgSrc="src/img/aboutButton.png" imgAlt="About button" />
+                <LinkButton to="/" btnClass="homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgalt="Home Button" />
+                <LinkButton to="/plan" btnClass="planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/contactButton.png" imgalt="Plan Button" />
+                <LinkButton to="/about" btnClass="aboutBtn" label="About" imgClass="aboutImg" imgSrc="src/img/aboutButton.png" imgalt="About button" />
             
         </>
     )

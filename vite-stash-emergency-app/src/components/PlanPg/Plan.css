@@ -42,7 +42,8 @@
 }
 
 .dropdown{
-    width: 220px;
+    width:fit-content;
+    max-height: 300px; 
 }
 
 .listDataStyle li {
