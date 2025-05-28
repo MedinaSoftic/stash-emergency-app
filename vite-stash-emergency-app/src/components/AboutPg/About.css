@@ -1,0 +1,47 @@
+.pg{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    word-spacing: 2%;
+    line-height: 3;
+}
+.founderBlock{
+    display: flex;
+    flex-direction: column;
+    word-spacing: 2%;
+}
+
+.founderLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}
+
+img.founder{
+    border-radius: 50%;
+    height: 250px;
+    width: 200px;
+}
+
+a:link{
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: green;
+    text-decoration: underline;
+}
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+a:active{
+    color: green;
+}
+
+
