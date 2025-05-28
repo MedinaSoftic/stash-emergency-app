@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import * as FaIcons from "react-icons/fa";
 import * as SlIcon from "react-icons/sl";
-import { SidebarData } from "./SidebarData";
+import { NavbarData } from "./NavbarData";
 import './NavBar.css';
 import {Link} from "react-router"
 import { IconContext } from "react-icons/lib";
@@ -12,10 +12,11 @@ export default function Navbar() {
     const showSidebar = () => setSidebar(!sidebar)
     return(
         <>
+        {/* React icon libary, logic for the nav bar, sidebar is ref to the nave bar sliding into the screen on click */}
         <IconContext.Provider value={{color: '#000000'}}>
         <div className="sideNav">
             <Link to="#">
-                <FaIcons.FaBars onClick={showSidebar}/>
+                <FaIcons.FaBars onClick={showSidebar}/>    
             </Link>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -25,7 +26,8 @@ export default function Navbar() {
                         <SlIcon.SlClose />
                     </Link>
                 </li>
-                {SidebarData.map((item, index) =>{
+                {/* maps over the information given from the NavBarData to become reusable */}
+                {NavbarData.map((item, index) =>{
                     return(
                         <li key={index} className={item.cName}>
                             <Link to={item.path}>

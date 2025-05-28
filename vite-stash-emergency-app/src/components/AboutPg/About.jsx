@@ -1,7 +1,8 @@
-import React from "react"
-import {Link} from "react-router"
-import LinkButton from "../LinkButton"
-import "./About.css"
+import React from "react";
+import {Link} from "react-router";
+import LinkButton from "../LinkButton";
+import "./About.css";
+import founderImg from "../../img/founder.jpeg";
 
 export default function About() {
 
@@ -41,19 +42,15 @@ return(
     <div className="founderLink">
     <a href="https://www.linkedin.com/in/medina-softic-363015200/">Linkedin</a>
    
-    <img className="founder" src="./src/img/founder.jpeg" imgAlt="Founder Img"/>
+    <img className="founder" src="./src/img/founder.jpeg" alt="Founder Img"/>
 
     
     <a href="https://github.com/MedinaSoftic">GitHub</a>
     </div>
     </div>
-    <div>
-   
-        <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgAlt="Home Button"/>
-        <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/planButton.png" imgAlt="Plan Button"/>
-        <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="src/img/contactButton.png" imgAlt="Contact Button"/>
-    </div>
-    
+        <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgalt="Home Button"/>
+        <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/planButton.png" imgalt="Plan Button"/>
+        <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="src/img/contactButton.png" imgalt="Contact Button"/>
     </>
     )
 }

@@ -18,30 +18,29 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    
+    padding-top: 20px;
 }
 
 img.founder{
     border-radius: 50%;
     height: 250px;
-    width: 200px;
 }
 
 a:link{
-    font-size: 30px;
-    color: black;
+    font-size: 40px;
+    color: #02bfe7;
     text-decoration: none;
 }
 a:hover{
-    color: green;
+    color: #02bfe7;
     text-decoration: underline;
 }
 a:visited{
-    color: black;
+    color: #02bfe7;
     text-decoration: none;
 }
 a:active{
-    color: green;
+    color: #02bfe7;
 }
 
 

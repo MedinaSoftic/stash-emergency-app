@@ -1,9 +1,14 @@
+
+
+
+
 .FlexCard{
  display: flex;
  flex-wrap: wrap;
  gap: 63px;
  justify-content: space-evenly;
  padding: 20px;
+ ;
 }
 
 .card{
@@ -20,6 +25,7 @@
  transition: transform 1s;
  transform-style: preserve-3d;
 }
+/* preserve 3d alows us to keep the backside of the card show the inner when flipped */
 
 .back,
 .front{
@@ -27,11 +33,12 @@
  height: 100%;
  border-radius: 15px;
  position: absolute;
- backface-visibility: hidden;
+ backface-visibility: hidden; 
 }
+/* position is absolute to keep the positions the same, or else back will be at bottom of screen, backface is hidden until flipped. */
 
 .front{
-  background: linear-gradient(#452309b4, #948b72);
+  background: linear-gradient(#00a6d2, #9bdaf1);
   background-size: cover;
   background-position: center;
   padding: 230px 40px;
@@ -71,23 +78,19 @@ p{
 
 a:link{
     font-size: 10px;
-    color: black;
+    color: #02bfe7;
     text-decoration: none;
 }
 a:hover{
-    color: green;
+    color: #02bfe7;
     text-decoration: underline;
 }
 a.localpolice:hover{
     color: red;
     text-decoration: underline;
 }
-a:visited{
-    color: black;
-    text-decoration: none;
-}
 a:active{
-    color: green;
+    color: #02bfe7;
 }
 
 .containerFrame{
