@@ -58,9 +58,9 @@ export default function Contact() {
                     <iframe className="responsiveFrame" width="560" height="315" src="https://www.youtube.com/embed/l3GJqNX5x9M?si=_OYDT6U1ObbHwFyO" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
                     </div>
                 </div>
-                <LinkButton to="/" btnClass="homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgalt="Home Button" />
-                <LinkButton to="/plan" btnClass="planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/contactButton.png" imgalt="Plan Button" />
-                <LinkButton to="/about" btnClass="aboutBtn" label="About" imgClass="aboutImg" imgSrc="src/img/aboutButton.png" imgalt="About button" />
+                <LinkButton to="/" btnClass="homeBtn" label="Home" imgClass="homeImg" imgSrc="public/img/homeButton.png" imgalt="Home Button" />
+                <LinkButton to="/plan" btnClass="planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="public/img/contactButton.png" imgalt="Plan Button" />
+                <LinkButton to="/about" btnClass="aboutBtn" label="About" imgClass="aboutImg" imgSrc="public/img/aboutButton.png" imgalt="About button" />
             
         </>
     )

@@ -34,7 +34,7 @@ export default function Plan() {
 
     const handleChange = (e) => {
         const{name, value} = e.target;
-        
+
         setUserListInput((inputUser)=> {
             return {
                 ...inputUser,
@@ -216,9 +216,9 @@ export default function Plan() {
         </form>
         )}
             <div>
-            <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgalt="Home Button"/>
-            <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="src/img/contactButton.png" imgalt="Contact Button"/>
-            <LinkButton to="/about" btnClass= "aboutBtn" label="About" imgClass="aboutImg" imgSrc="src/img/aboutButton.png" imgalt="About button"/>
+            <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="/img/homeButton.png" imgalt="Home Button"/>
+            <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="/img/contactButton.png" imgalt="Contact Button"/>
+            <LinkButton to="/about" btnClass= "aboutBtn" label="About" imgClass="aboutImg" imgSrc="/img/aboutButton.png" imgalt="About button"/>
         </div>
         </div>
         </>

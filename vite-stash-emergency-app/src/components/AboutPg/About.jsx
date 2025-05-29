@@ -42,15 +42,15 @@ return(
     <div className="founderLink">
     <a href="https://www.linkedin.com/in/medina-softic-363015200/">Linkedin</a>
    
-    <img className="founder" src="./src/img/founder.jpeg" alt="Founder Img"/>
+    <img className="founder" src="./public/img/founder.jpeg" alt="Founder Img"/>
 
     
     <a href="https://github.com/MedinaSoftic">GitHub</a>
     </div>
     </div>
-        <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="src/img/homeButton.png" imgalt="Home Button"/>
-        <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="src/img/planButton.png" imgalt="Plan Button"/>
-        <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="src/img/contactButton.png" imgalt="Contact Button"/>
+        <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="public/img/homeButton.png" imgalt="Home Button"/>
+        <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="public/img/planButton.png" imgalt="Plan Button"/>
+        <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="public/img/contactButton.png" imgalt="Contact Button"/>
     </>
     )
 }
