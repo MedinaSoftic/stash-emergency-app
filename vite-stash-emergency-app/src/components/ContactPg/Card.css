@@ -1,7 +1,3 @@
-
-
-
-
 .FlexCard{
  display: flex;
  flex-wrap: wrap;
@@ -13,7 +9,7 @@
 
 .card{
  width: 350px;
- height: 515px;
+ height: 520px;
  margin: auto;
  perspective: 900px;
 }
@@ -34,8 +30,15 @@
  border-radius: 15px;
  position: absolute;
  backface-visibility: hidden; 
+}/* position is absolute to keep the positions the same, or else back will be at bottom of screen, backface is hidden until flipped. */
+.cardInfo{
+  padding: 20px 40px;
+  font-size: 17px;
+  word-spacing: 3%;
+  line-height: 3;
+  padding-bottom: 5px;
+   
 }
-/* position is absolute to keep the positions the same, or else back will be at bottom of screen, backface is hidden until flipped. */
 
 .front{
   background: linear-gradient(#00a6d2, #9bdaf1);
@@ -70,11 +73,6 @@
     color: red;
 }
 
-p{
-    font-size: 17px;
-    word-spacing: 2%;
-    line-height: 1.7;
-}
 
 a:link{
     font-size: 10px;
@@ -108,3 +106,27 @@ a:active{
     height: 100%;
 }
 
+* { margin:0px; padding:0px; }
+.back { 
+  width:350px; 
+  margin:0px auto;  }
+.cardInfo { 
+  border:0px none; 
+  height:305px; 
+  line-height:30px; 
+  width:100%; 
+  padding:0px 10px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (min-width:342px)
+{
+.back { 
+  width:auto; 
+  padding:0px 10px; }
+.cardInfo { float:none; 
+  width:100%; 
+  margin-bottom:10px }
+}
