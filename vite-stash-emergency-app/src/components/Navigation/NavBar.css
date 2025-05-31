@@ -18,6 +18,7 @@
 }
 
 .nav-menu {
+    z-index: 7;
     background-color: rgba(32, 84, 147);
     width: 150px;
     height: 350px;
