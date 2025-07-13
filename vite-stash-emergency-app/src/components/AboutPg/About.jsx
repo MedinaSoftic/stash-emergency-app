@@ -7,7 +7,6 @@ import founderImg from "/img/founder.jpeg";
 export default function About() {
 
 
-
 return(
     <>
     <div className="pg">   
