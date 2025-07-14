@@ -1,37 +1,78 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router";
 import LinkButton from "../LinkButton";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
+import "./SignInRegistration.css"
+
 
 
 export default function SignIn() {
 
+    const [register, setRegister] = useState("Sign Up");
+
+    const[formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Form submitted: ", formData)
+    };
+
     return (
         <>
+        <form onSubmit={handleSubmit}>
         <div className="container">
             <div className="header">
-                <div className="text">Register</div>
+                <div className="text">{register}</div>
                 <div className="underline"></div>
             </div>
             <div className="inputs">
                 <div className="input">
-                    <img src="" alt="" />
-                    <input type="text" />
+                    {register === "Login" ? <div></div> : (
+                    <div>
+                        <div className="img"><span><FaUser /></span></div>
+                        <input type="text" placeholder="Name" name="name" onChange={handleChange}/>
+                    </div>
+                    )}
                 </div>
                 <div className="input">
-                    <img src="" alt="" />
-                    <input type="email" />
-            </div>
-            <div className="input">
-                    <img src="" alt="" />
-                    <input type="password" />
+                    <div className="img"><span><MdEmail /></span></div>
+                    <input type="email" placeholder="Email" name="email" onChange={handleChange}/>
+                </div>
+                <div className="input">
+                    <div className="img"><span><RiLockPasswordLine /></span></div>
+                    <input type="password" placeholder="Password" name="password" onChange={handleChange}/>
                 </div>
             </div>
+            <div className="submit-contaier">
+                <div className={register==="Login"?"Submit gray":"Submit"} onClick={()=>{setRegister("Sign Up")}}>Sign Up</div>
+                <div className={register==="Sign Up"?"Submit gray":"Submit"} onClick={()=>{setRegister("Login")}}>Login</div>
+            <button 
+                type="submit" 
+                className="Submit"
+                disabled={!formData.email || !formData.password || (register !== "Login" && !formData.name)}>
+                Submit
+            </button>
+            </div>
         </div>
-        
+        </form>
                 <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="/img/homeButton.png" imgalt="Home Button"/>
                 <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="/img/planButton.png" imgalt="Plan Button"/>
                 <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="/img/contactButton.png" imgalt="Contact Button"/>
+                <LinkButton to="/about" btnClass="aboutBtn" label="About" imgClass="aboutImg" imgSrc="/img/aboutButton.png" imgalt="About button" />
+                
         </>
     )
 }
