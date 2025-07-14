@@ -5,6 +5,7 @@ import Contact from './components/ContactPg/Contact';
 import About from './components/AboutPg/About';
 import './App.css';
 import Navbar from './components/Navigation/Navbar';
+import SignIn from './components/SignInPg/SignInRegistration';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/plan" element={<Plan/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/about" element={<About/>}/>
+            <Route path="/SignIn" element={<SignIn/>}/>
         </Routes>
       </BrowserRouter>
     </>
