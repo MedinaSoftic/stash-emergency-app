@@ -2,7 +2,9 @@ package com.stash.stash_backend.model;
 
 import jakarta.persistence.*;
 
+@Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
