@@ -1,6 +1,7 @@
 package com.stash.stash_backend.controller;
 
 
+import com.stash.stash_backend.dto.EmergencyReportDTO;
 import com.stash.stash_backend.model.EmergencyReport;
 import com.stash.stash_backend.repository.EmergencyReportRepository;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class EmergencyReportController {
         return emergencyReportRepository.findById(id).orElse(null);
     }
 
-    @DeleteMapping{"/{id}"}
+    @DeleteMapping("/{id}")
     public void deleteReport(@PathVariable Long id) {
         emergencyReportRepository.deleteById(id);
     }
@@ -45,6 +46,13 @@ public class EmergencyReportController {
         report.setLocation(updatedReport.getLocation());
         report.setZipCode(updatedReport.getZipCode());
         return emergencyReportRepository.save(report);
+    }
+
+    @GetMapping("/api/reports")
+    public List<EmergencyReportDTO> getAllReportsDTO() {
+        return emergencyReportRepository.findAll().stream()
+                .map(EmergencyReportDTO::fromEntity)
+                .toList();
     }
 
     @GetMapping("/zipcode/{zipCode}")
