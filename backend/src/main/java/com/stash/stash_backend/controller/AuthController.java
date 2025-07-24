@@ -21,7 +21,7 @@ public class AuthController {
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     //endpoint to register a new user
-    @PostMapping(value = "/register", consumes = "application/json")
+    @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return ResponseEntity.badRequest().body("Email already in use");
@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     //endpoint to login a user
-    @PostMapping(value = "/login", consumes = "application/json")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         Optional<User> userOpt = userRepository.findByEmail(loginRequest.getEmail());
         if (userOpt.isEmpty()) {

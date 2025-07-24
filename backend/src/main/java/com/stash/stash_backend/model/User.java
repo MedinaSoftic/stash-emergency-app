@@ -16,7 +16,7 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<EmergencyReport> reports;
 
@@ -50,5 +50,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<EmergencyReport> getReports() {
+        return reports;
+    }
+
+    public void setReports(List<EmergencyReport> reports) {
+        this.reports = reports;
     }
 }
