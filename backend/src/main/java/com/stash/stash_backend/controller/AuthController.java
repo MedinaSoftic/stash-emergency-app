@@ -1,7 +1,7 @@
 package com.stash.stash_backend.controller;
 
 import com.stash.stash_backend.model.User;
-import com.stash.stash_backend.dto.LoginRequest;
+import com.stash.stash_backend.dto.LoginRequestDTO;
 import com.stash.stash_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -33,7 +33,7 @@ public class AuthController {
 
     //endpoint to login a user
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         Optional<User> userOpt = userRepository.findByEmail(loginRequest.getEmail());
         if (userOpt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
