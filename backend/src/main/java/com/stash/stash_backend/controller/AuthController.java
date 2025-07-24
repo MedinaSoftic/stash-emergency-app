@@ -1,5 +1,6 @@
 package com.stash.stash_backend.controller;
 
+import com.stash.stash_backend.dto.UserDTO;
 import com.stash.stash_backend.model.User;
 import com.stash.stash_backend.dto.LoginRequestDTO;
 import com.stash.stash_backend.repository.UserRepository;
@@ -28,7 +29,10 @@ public class AuthController {
     }
         user.setPassword(encoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
-        return  ResponseEntity.ok(savedUser);
+
+        // Convert to DTO to hide password and send clean response
+        UserDTO dto = new UserDTO(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
+        return ResponseEntity.ok(dto);
     }
 
     //endpoint to login a user
