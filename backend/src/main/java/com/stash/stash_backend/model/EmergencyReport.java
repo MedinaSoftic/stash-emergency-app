@@ -1,5 +1,6 @@
 package com.stash.stash_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -16,7 +17,7 @@ public class EmergencyReport {
     private String zipCode;
     private LocalDateTime timestamp = LocalDateTime.now();
 
-   @ManyToMany
+   @ManyToOne
    @JoinColumn(name = "user_id")
    private User user;
 

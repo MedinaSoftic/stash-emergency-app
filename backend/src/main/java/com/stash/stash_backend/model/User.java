@@ -1,6 +1,9 @@
 package com.stash.stash_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class User {
@@ -12,6 +15,10 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<EmergencyReport> reports;
 
     public Long getId() {
         return id;
