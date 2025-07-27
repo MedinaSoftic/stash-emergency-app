@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/reports")
 public class EmergencyReportController {
 
     private final EmergencyReportRepository emergencyReportRepository;
@@ -48,8 +48,8 @@ public class EmergencyReportController {
         return emergencyReportRepository.save(report);
     }
 
-    @GetMapping("/api/reports")
-    public List<EmergencyReportDTO> getAllReportsDTO() {
+    @GetMapping("/dto")
+    public List<EmergencyReportDTO> getAllReportsAsDTO() {
         return emergencyReportRepository.findAll().stream()
                 .map(EmergencyReportDTO::fromEntity)
                 .toList();

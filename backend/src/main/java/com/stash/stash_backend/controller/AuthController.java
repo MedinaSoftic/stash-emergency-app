@@ -9,6 +9,7 @@ import org.springframework.http.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,15 +25,25 @@ public class AuthController {
     //endpoint to register a new user
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            return ResponseEntity.badRequest().body("Password is required.");
+        }
+
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return ResponseEntity.badRequest().body("Email already in use");
-    }
+        }
+
         user.setPassword(encoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
 
-        // Convert to DTO to hide password and send clean response
         UserDTO dto = new UserDTO(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
         return ResponseEntity.ok(dto);
+    }
+
+    //all users endpoint
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     //endpoint to login a user
