@@ -6,6 +6,7 @@ import About from './components/AboutPg/About';
 import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import SignIn from './components/SignInPg/SignInRegistration';
+import Dashboard from './components/DashboardPg/Dashboard';
 
 function App() {
 

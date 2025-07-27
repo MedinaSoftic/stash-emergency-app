@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
+import axios from "axios";
 import LinkButton from "../LinkButton";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -10,6 +11,7 @@ import "./SignInRegistration.css"
 
 export default function SignIn() {
 
+    const navigate = useNavigate();
     const [register, setRegister] = useState("Sign Up");
 
     const[formData, setFormData] = useState({
@@ -25,10 +27,25 @@ export default function SignIn() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted: ", formData)
+        try {
+            if (register === "Sign Up") {
+                console.log("Sending formData:", formData);
+                await axios.post("http://localhost:8080/api/auth/register", formData);
+            } else {
+                await axios.post("http://localhost:8080/api/auth/login", {
+                    email: formData.email,
+                    password: formData.password,
+                });
+            }
+            navigate("/dashboard"); // redirect to dashboard on success
+            } catch (err) {
+            console.error("Error during auth:", err);
+            alert("Login/Register failed. Check console for details.");
+        }
     };
+    
 
     return (
         <>
