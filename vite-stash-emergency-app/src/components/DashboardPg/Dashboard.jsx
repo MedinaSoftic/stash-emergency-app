@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LinkButton from "../LinkButton";
+import "./Dashboard.css"
 
 function Dashboard() {
   const [reports, setReports] = useState([]);
@@ -44,9 +45,11 @@ function Dashboard() {
             <option value="Water">Water</option>
             <option value="Fire">Fire</option>
         </select>
-        <input placeholder="Description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
-        <input placeholder="Location" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} />
-        <input placeholder="Zip Code" value={formData.zipCode} onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })} />
+        <div className="inputDiv">
+        <textarea className="Description" placeholder="Description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
+        <input className="Location" placeholder="Location" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} />
+        <input className="Zipcode" placeholder="Zip Code" value={formData.zipCode} onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })} />
+        </div>
         <button type="submit">Submit Report</button>
       </form>
 

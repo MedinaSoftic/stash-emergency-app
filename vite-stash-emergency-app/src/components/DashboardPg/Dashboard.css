@@ -1,0 +1,45 @@
+form{
+
+}
+.inputDiv{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.typeDropDown{
+    height: 50px;
+    width: 300px;
+    font-size: larger;
+    margin-bottom: 20px;
+}
+.Description{
+    height: 150px;
+    width: 300px;
+    font-size: larger;
+    margin-bottom: 20px;
+}
+textarea {
+    vertical-align: top;
+    padding-top: 5px;
+}
+.Location{
+    height: 50px;
+    width: 300px;
+    font-size: larger;
+    margin-bottom: 20px;
+}
+.Zipcode{
+    height: 50px;
+    width: 300px;
+    font-size: larger;
+    margin-bottom: 20px;
+}
+button{
+   height: 40px;
+    width: 200px;
+    font-size: larger;
+    margin-bottom: 20px; 
+}

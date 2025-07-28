@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import "./SignInRegistration.css"
+import { useUser } from "../UserContext/UserContext";
 
 
 
@@ -13,6 +14,7 @@ export default function SignIn() {
 
     const navigate = useNavigate();
     const [register, setRegister] = useState("Sign Up");
+    const { setUser } = useUser();
 
     const[formData, setFormData] = useState({
         name: "",
@@ -30,22 +32,23 @@ export default function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (register === "Sign Up") {
                 console.log("Sending formData:", formData);
-                await axios.post("http://localhost:8080/api/auth/register", formData);
+                response = await axios.post("http://localhost:8080/api/auth/register", formData);
             } else {
-                await axios.post("http://localhost:8080/api/auth/login", {
+                response = await axios.post("http://localhost:8080/api/auth/login", {
                     email: formData.email,
                     password: formData.password,
                 });
             }
-            navigate("/dashboard"); // redirect to dashboard on success
-            } catch (err) {
+            setUser(response.data); // 👈 set global user context
+            navigate("/dashboard"); // 👈 redirect after setting user
+        } catch (err) {
             console.error("Error during auth:", err);
             alert("Login/Register failed. Check console for details.");
         }
     };
-    
 
     return (
         <>

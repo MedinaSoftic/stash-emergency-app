@@ -9,8 +9,7 @@ import SignIn from './components/SignInPg/SignInRegistration';
 import Dashboard from './components/DashboardPg/Dashboard';
 
 function App() {
-
-
+  
   return (
     <>
       <BrowserRouter>
