@@ -1,10 +1,12 @@
 package com.stash.stash_backend.controller;
 
-
 import com.stash.stash_backend.dto.EmergencyReportDTO;
 import com.stash.stash_backend.model.EmergencyReport;
 import com.stash.stash_backend.repository.EmergencyReportRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.stash.stash_backend.model.User;
+import com.stash.stash_backend.repository.UserRepository;
 
 import java.util.List;
 
@@ -13,9 +15,11 @@ import java.util.List;
 public class EmergencyReportController {
 
     private final EmergencyReportRepository emergencyReportRepository;
+    private final UserRepository userRepository;
 
-    public EmergencyReportController(EmergencyReportRepository reportRepository) {
+    public EmergencyReportController(EmergencyReportRepository reportRepository, UserRepository userRepository) {
         this.emergencyReportRepository = reportRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -24,8 +28,21 @@ public class EmergencyReportController {
     }
 
     @PostMapping
-    public EmergencyReport createReport(@RequestBody EmergencyReport report) {
-        return emergencyReportRepository.save(report);
+    public ResponseEntity<?> createReport(@RequestBody EmergencyReport report) {
+        if (report.getUser() == null || report.getUser().getId() == null) {
+            return ResponseEntity.badRequest().body("User is required.");
+        }
+
+        // Fetch managed user
+        User managedUser = userRepository.findById(report.getUser().getId())
+                .orElse(null);
+        if (managedUser == null) {
+            return ResponseEntity.badRequest().body("User not found.");
+        }
+
+        report.setUser(managedUser);
+        EmergencyReport saved = emergencyReportRepository.save(report);
+        return ResponseEntity.ok(saved);
     }
 
     @GetMapping("/{id}")
