@@ -51,13 +51,18 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         Optional<User> userOpt = userRepository.findByEmail(loginRequest.getEmail());
         if (userOpt.isEmpty()) {
+            System.out.println("User not found: " + loginRequest.getEmail());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
     }
 
     User user = userOpt.get();
+    System.out.println("Encoded password: " + user.getPassword());
     if (!encoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        System.out.println("Password mismatch!");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
         }
-    return ResponseEntity.ok("Login successful");
+
+        UserDTO dto = new UserDTO(user.getId(), user.getName(), user.getEmail());
+        return ResponseEntity.ok(dto);
     }
 }
