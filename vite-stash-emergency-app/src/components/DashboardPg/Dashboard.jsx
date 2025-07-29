@@ -2,34 +2,52 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LinkButton from "../LinkButton";
 import "./Dashboard.css"
+import { useUser } from "../UserContext/UserContext";
 
 function Dashboard() {
-  const [reports, setReports] = useState([]);
-  const [formData, setFormData] = useState({
-    type: "",
-    description: "",
-    location: "",
-    zipCode: "",
-    user: { id: localStorage.getItem("userId") },
-  });
+    const {user} = useUser();
+    console.log("user in dashboard:", user);
+    
+    const [reports, setReports] = useState([]);
+    const [formData, setFormData] = useState({
+        type: "",
+        description: "",
+        location: "",
+        zipCode: "",
+        user: null,
+    });
 
   // GET user's reports on page load
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
+    if (!user?.id) return;
     axios
-      .get(`http://localhost:8080/api/reports/user/${userId}`)
-      .then((res) => setReports(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+        .get(`http://localhost:8080/api/reports/user/${user.id}`)
+        .then((res) => setReports(res.data))
+        .catch((err) => console.error(err));
+    }, [user]);
 
   // POST new report
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!user || !user.id) {
+        console.error("user is not defined", user);
+        return;
+    }
+
     axios
-      .post("http://localhost:8080/api/reports", formData)
+      .post("http://localhost:8080/api/reports", { 
+        ...formData,
+        user: {id: user.id}, 
+    })
       .then((res) => {
         setReports([...reports, res.data]);
-        setFormData({ ...formData, type: "", description: "", location: "", zipCode: "" });
+        setFormData({ 
+            type: "", 
+            description: "", 
+            location: "", 
+            zipCode: "" 
+        });
       })
       .catch((err) => console.error(err));
   };

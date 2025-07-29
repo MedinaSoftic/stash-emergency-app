@@ -42,8 +42,8 @@ export default function SignIn() {
                     password: formData.password,
                 });
             }
-            setUser(response.data); // 👈 set global user context
-            navigate("/dashboard"); // 👈 redirect after setting user
+            setUser(response.data); 
+            navigate("/dashboard"); 
         } catch (err) {
             console.error("Error during auth:", err);
             alert("Login/Register failed. Check console for details.");

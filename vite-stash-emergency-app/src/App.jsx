@@ -7,21 +7,24 @@ import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import SignIn from './components/SignInPg/SignInRegistration';
 import Dashboard from './components/DashboardPg/Dashboard';
+import { UserProvider } from './components/UserContext/UserContext';
 
 function App() {
-  
+
   return (
     <>
       <BrowserRouter>
-        <Navbar/>
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-            <Route path="/plan" element={<Plan/>}/>
-            <Route path="/contact" element={<Contact/>}/>
-            <Route path="/about" element={<About/>}/>
-            <Route path="/SignIn" element={<SignIn/>}/>
-            <Route path="/dashboard" element={<Dashboard />}/>
-        </Routes>
+        <UserProvider>
+          <Navbar/>
+          <Routes>
+            <Route path="/" element={<HomePage/>}/>
+              <Route path="/plan" element={<Plan/>}/>
+              <Route path="/contact" element={<Contact/>}/>
+              <Route path="/about" element={<About/>}/>
+              <Route path="/SignIn" element={<SignIn/>}/>
+              <Route path="/dashboard" element={<Dashboard />}/>
+          </Routes>
+        </UserProvider>
       </BrowserRouter>
     </>
   )
