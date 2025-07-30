@@ -1,13 +1,16 @@
 package com.stash.stash_backend.controller;
 
+import com.stash.stash_backend.dto.AuthResponseDTO;
 import com.stash.stash_backend.dto.UserDTO;
 import com.stash.stash_backend.model.User;
 import com.stash.stash_backend.dto.LoginRequestDTO;
 import com.stash.stash_backend.repository.UserRepository;
+import com.stash.stash_backend.security.JwtSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +22,9 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtSecurity jwtSecurity;
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -61,8 +67,11 @@ public class AuthController {
         System.out.println("Password mismatch!");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
         }
+        //Generate a token
+        String token = jwtSecurity.generateToken(user.getEmail());
 
+        // Return user info and token
         UserDTO dto = new UserDTO(user.getId(), user.getName(), user.getEmail());
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(new AuthResponseDTO(dto, token));
     }
 }
