@@ -17,9 +17,9 @@ public class EmergencyReportController {
     private final EmergencyReportRepository emergencyReportRepository;
     private final UserRepository userRepository;
 
-    public EmergencyReportController(EmergencyReportRepository reportRepository, UserRepository userRepository) {
-        this.emergencyReportRepository = reportRepository;
-        this.userRepository = userRepository;
+    public EmergencyReportController(EmergencyReportRepository reportRepo, UserRepository userRepo) {
+        this.emergencyReportRepository = reportRepo;
+        this.userRepository = userRepo;
     }
 
     @GetMapping
@@ -34,8 +34,7 @@ public class EmergencyReportController {
         }
 
         // Fetch managed user
-        User managedUser = userRepository.findById(report.getUser().getId())
-                .orElse(null);
+        User managedUser = userRepository.findById(report.getUser().getId()).orElse(null);
         if (managedUser == null) {
             return ResponseEntity.badRequest().body("User not found.");
         }
