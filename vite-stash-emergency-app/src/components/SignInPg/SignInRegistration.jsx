@@ -6,7 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import "./SignInRegistration.css"
-import { useUser } from "../UserContext/UserContext";
+import { useUser } from "../User/UserContext";
 
 
 

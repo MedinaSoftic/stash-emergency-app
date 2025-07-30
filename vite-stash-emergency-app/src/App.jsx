@@ -1,4 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router';
+import { UserProvider } from './components/User/UserContext';
 import HomePage from './components/HomePage';
 import Plan from './components/PlanPg/Plan';
 import Contact from './components/ContactPg/Contact';
@@ -7,14 +8,14 @@ import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import SignIn from './components/SignInPg/SignInRegistration';
 import Dashboard from './components/DashboardPg/Dashboard';
-import { UserProvider } from './components/UserContext/UserContext';
+
 
 function App() {
 
   return (
     <>
+      <UserProvider>
       <BrowserRouter>
-        <UserProvider>
           <Navbar/>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
@@ -24,8 +25,8 @@ function App() {
               <Route path="/SignIn" element={<SignIn/>}/>
               <Route path="/dashboard" element={<Dashboard />}/>
           </Routes>
-        </UserProvider>
       </BrowserRouter>
+      </UserProvider>
     </>
   )
 }

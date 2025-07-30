@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LinkButton from "../LinkButton";
 import "./Dashboard.css"
-import { useUser } from "../UserContext/UserContext";
+import { useUser } from "../User/UserContext";
 
 function Dashboard() {
     const {user} = useUser();
@@ -30,10 +30,10 @@ function Dashboard() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!user || !user.id) {
-        console.error("user is not defined", user);
+    if (typeof user === "undefined" || !user?.id) {
+        console.error("User not available");
         return;
-    }
+    }      
 
     axios
       .post("http://localhost:8080/api/reports", { 
