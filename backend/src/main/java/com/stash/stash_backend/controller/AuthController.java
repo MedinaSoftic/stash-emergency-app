@@ -12,7 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -67,11 +69,15 @@ public class AuthController {
         System.out.println("Password mismatch!");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
         }
+
         //Generate a token
-        String token = jwtSecurity.generateToken(user.getEmail());
+        String token = jwtSecurity.generateToken(user.getEmail(), user.getId());
 
         // Return user info and token
-        UserDTO dto = new UserDTO(user.getId(), user.getName(), user.getEmail());
-        return ResponseEntity.ok(new AuthResponseDTO(dto, token));
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("user", new UserDTO(user.getId(), user.getName(), user.getEmail()));
+        responseBody.put("token", token);
+
+        return ResponseEntity.ok(responseBody);
     }
 }
