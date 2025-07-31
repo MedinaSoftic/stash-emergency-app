@@ -47,7 +47,7 @@ export const NavbarData = [
         {
         title: 'Dashboard',
         path: '/dashboard',
-        icon: <RiDashboardHorizontalFill size={24} color="black"/>,
+        icon: <RiDashboardHorizontalFill/>,
         cName: 'nav-text' 
         }
 ]

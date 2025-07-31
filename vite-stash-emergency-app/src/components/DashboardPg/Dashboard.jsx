@@ -35,6 +35,11 @@ function Dashboard() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!formData.type || !formData.description || !formData.location || !formData.zipCode) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
         if (!user?.id) {
             console.error("User not available");
             return;

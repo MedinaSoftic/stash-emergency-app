@@ -20,7 +20,7 @@
 .nav-menu {
     z-index: 7;
     background-color: rgba(32, 84, 147);
-    width: 150px;
+    width: 180px;
     height: 480px;
     display: flex;
     justify-content: center;

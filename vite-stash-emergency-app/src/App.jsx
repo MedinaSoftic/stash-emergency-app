@@ -8,6 +8,7 @@ import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import SignIn from './components/SignInPg/SignInRegistration';
 import Dashboard from './components/DashboardPg/Dashboard';
+import DashBoardProtected from './components/DashboardPg/DashBoardProtected';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
               <Route path="/contact" element={<Contact/>}/>
               <Route path="/about" element={<About/>}/>
               <Route path="/SignIn" element={<SignIn/>}/>
-              <Route path="/dashboard" element={<Dashboard />}/>
+              <Route path="/dashboard" element={<DashBoardProtected><Dashboard /></DashBoardProtected>}/>
           </Routes>
       </BrowserRouter>
       </UserProvider>
