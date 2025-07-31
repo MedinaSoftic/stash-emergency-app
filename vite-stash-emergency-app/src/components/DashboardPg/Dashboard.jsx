@@ -3,10 +3,16 @@ import axios from "axios";
 import LinkButton from "../LinkButton";
 import "./Dashboard.css"
 import { useUser } from "../User/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-    const {user} = useUser();
+    const {user, setUser} = useUser();
     console.log("user in dashboard:", user);
+
+    const navigate = useNavigate();
+
+    const [isEditing, setIsEditing] = useState(false)
+    const [editId, setEditId] = useState(null)
     
     const [reports, setReports] = useState([]);
     const [formData, setFormData] = useState({
@@ -26,31 +32,62 @@ function Dashboard() {
         .catch((err) => console.error(err));
     }, [user]);
 
-  // POST new report
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    if (typeof user === "undefined" || !user?.id) {
-        console.error("User not available");
-        return;
-    }      
+        if (!user?.id) {
+            console.error("User not available");
+            return;
+        }
 
-    axios
-      .post("http://localhost:8080/api/reports", { 
+    const reportData = {
         ...formData,
-        user: {id: user.id}, 
-    })
-      .then((res) => {
-        setReports([...reports, res.data]);
-        setFormData({ 
-            type: "", 
-            description: "", 
-            location: "", 
-            zipCode: "" 
-        });
-      })
+        user: { id: user.id }
+    };
+    
+    // PUT request to update existing report
+    if (isEditing && editId) {
+        axios
+        .put(`http://localhost:8080/api/reports/${editId}`, reportData)
+        .then((res) => {
+            const updatedReports = reports.map((r) =>
+                r.id === editId ? res.data : r
+            );
+            setReports(updatedReports);
+            resetForm();
+        })
       .catch((err) => console.error(err));
-  };
+  } else {
+    // POST request to create new report
+    axios
+        .post("http://localhost:8080/api/reports", reportData)
+        .then((res) => {
+            setReports([...reports, res.data]);
+            resetForm();
+        })
+        .catch((err) => console.error(err));
+    }
+    };
+
+    const resetForm = () => {
+        setFormData({
+            type: "",
+            description: "",
+            location: "",
+            zipCode: ""
+        });
+        setIsEditing(false);
+        setEditId(null);
+    };
+
+    // Logout user and navigate back to sign in page 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        delete axios.defaults.headers.common["Authorization"];
+        setUser(null);
+        navigate("/signin");
+    };
+
 
   return (
     <>
@@ -64,9 +101,9 @@ function Dashboard() {
             <option value="Fire">Fire</option>
         </select>
         <div className="inputDiv">
-        <textarea className="Description" placeholder="Description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
-        <input className="Location" placeholder="Location" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} />
-        <input className="Zipcode" placeholder="Zip Code" value={formData.zipCode} onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })} />
+            <textarea className="Description" placeholder="Description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
+            <input className="Location" placeholder="Location" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} />
+            <input className="Zipcode" placeholder="Zip Code" value={formData.zipCode} onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })} />
         </div>
         <button type="submit">Submit Report</button>
       </form>
@@ -74,11 +111,33 @@ function Dashboard() {
       <h3>Your Submitted Reports:</h3>
       <ul>
         {reports.map((report) => (
-          <li key={report.id}>
-            <strong>{report.type}</strong>: {report.description} — {report.location} ({report.zipCode})
-          </li>
+            <li key={report.id}>
+                <strong>{report.type}</strong>: {report.description} — {report.location} ({report.zipCode})
+                <button onClick={() => {
+                    setFormData({
+                        type: report.type,
+                        description: report.description,
+                        location: report.location,
+                        zipCode: report.zipCode
+                });
+                setIsEditing(true);
+                setEditId(report.id);
+            }} className="editBttn">Edit</button>
+            <button onClick={() => {
+                axios.delete(`http://localhost:8080/api/reports/${report.id}`)
+                    .then(() => {
+                        setReports(reports.filter(r => r.id !== report.id));
+                    })
+                     .catch(err => console.error(err));
+                }}className="deleteBttn">Delete</button>
+            </li>
         ))}
       </ul>
+
+      <div className="logoutContainer">
+        <button onClick={handleLogout} className="logoutBtn">Logout</button>
+      </div>
+
         <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="/img/homeButton.png" imgalt="Home Button"/>
         <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="/img/planButton.png" imgalt="Plan Button"/>
         <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="/img/contactButton.png" imgalt="Contact Button"/>

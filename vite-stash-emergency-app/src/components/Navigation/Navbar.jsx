@@ -13,7 +13,7 @@ export default function Navbar() {
     return(
         <>
         {/* React icon libary, logic for the nav bar, sidebar is ref to the nave bar sliding into the screen on click */}
-        <IconContext.Provider value={{color: '#000000'}}>
+        <IconContext.Provider value={{color: '#000000', size: '24px' }}>
         <div className="sideNav">
             <Link to="#">
                 <FaIcons.FaBars onClick={showSidebar}/>    
