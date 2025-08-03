@@ -12,9 +12,9 @@ import { useUser } from "../User/UserContext";
 
 export default function SignIn() {
 
-    const navigate = useNavigate();
-    const [register, setRegister] = useState("Sign Up");
-    const { setUser } = useUser();
+    const navigate = useNavigate(); //redirects to dashboard after login
+    const [register, setRegister] = useState("Sign Up"); // toggle between sign up and login
+    const { setUser } = useUser(); //method to update user context after login
 
     const[formData, setFormData] = useState({
         name: "",
@@ -22,6 +22,8 @@ export default function SignIn() {
         password: ""
     });
 
+
+    // handles changes to form input field
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -29,20 +31,25 @@ export default function SignIn() {
         });
     };
 
+    //Submission for both sign up and login 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             let response;
             if (register === "Sign Up") {
+                // Sends data to /register endpoint
                 console.log("Sending formData:", formData);
                 response = await axios.post("http://localhost:8080/api/auth/register", formData);
             } else {
+                // Sends credentials to /login endpoint
                 response = await axios.post("http://localhost:8080/api/auth/login", {
                     email: formData.email,
                     password: formData.password,
                 });
             }
+
             const {token, user} = response.data;
+            // saves token in local storage and set default header for all axios requests 
             localStorage.setItem("token", token);
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`; // sets token globally
             setUser(user);
@@ -63,6 +70,7 @@ export default function SignIn() {
             </div>
             <div className="inputs">
                 <div className="input">
+                    {/* Only show Name input on sign up mode*/}
                     {register === "Login" ? <div></div> : (
                     <div>
                         <div className="img"><span><FaUser /></span></div>
@@ -70,10 +78,12 @@ export default function SignIn() {
                     </div>
                     )}
                 </div>
+                {/*Email input */}
                 <div className="input">
                     <div className="img"><span><MdEmail /></span></div>
                     <input type="email" placeholder="Email" name="email" onChange={handleChange}/>
                 </div>
+                {/*Pass */}
                 <div className="input">
                     <div className="img"><span><RiLockPasswordLine /></span></div>
                     <input type="password" placeholder="Password" name="password" onChange={handleChange}/>
@@ -82,6 +92,7 @@ export default function SignIn() {
             <div className="submit-contaier">
                 <div className={register==="Login"?"Submit gray":"Submit"} onClick={()=>{setRegister("Sign Up")}}>Sign Up</div>
                 <div className={register==="Sign Up"?"Submit gray":"Submit"} onClick={()=>{setRegister("Login")}}>Login</div>
+                {/*Submit button is disabled unless fields are filled in*/}
             <button 
                 type="submit" 
                 className="Submit"
