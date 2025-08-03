@@ -25,6 +25,7 @@ function App() {
               <Route path="/contact" element={<Contact/>}/>
               <Route path="/about" element={<About/>}/>
               <Route path="/SignIn" element={<SignIn/>}/>
+              {/*In dashboard route this is where we use protected to wrap around dashboard(the child) once a user is cleared they can then access the dashboard. */}
               <Route path="/dashboard" element={<DashBoardProtected><Dashboard /></DashBoardProtected>}/>
               <Route path="/reports" element={<PublicAllReports />} />
           </Routes>
