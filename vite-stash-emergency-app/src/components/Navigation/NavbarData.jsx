@@ -2,15 +2,12 @@ import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as SlIcon from "react-icons/sl";
 import * as IoIcon from "react-icons/io";
-import * as RiIcon from "react-icons/ri";
 import { FaAddressCard } from "react-icons/fa";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FcAbout } from "react-icons/fc";
 import { IoInformationCircle } from "react-icons/io5";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
-
-
-
+import { HiDocumentReport } from "react-icons/hi";
 
 export const NavbarData = [
     {
@@ -48,6 +45,12 @@ export const NavbarData = [
         title: 'Dashboard',
         path: '/dashboard',
         icon: <RiDashboardHorizontalFill/>,
+        cName: 'nav-text' 
+    },
+        {
+        title: 'Reports',
+        path: '/reports',
+        icon: <HiDocumentReport/>,
         cName: 'nav-text' 
         }
 ]

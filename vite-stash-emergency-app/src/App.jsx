@@ -9,6 +9,7 @@ import Navbar from './components/Navigation/Navbar';
 import SignIn from './components/SignInPg/SignInRegistration';
 import Dashboard from './components/DashboardPg/Dashboard';
 import DashBoardProtected from './components/DashboardPg/DashBoardProtected';
+import PublicAllReports from "./components/PublicReports/PublicAllReports";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               <Route path="/about" element={<About/>}/>
               <Route path="/SignIn" element={<SignIn/>}/>
               <Route path="/dashboard" element={<DashBoardProtected><Dashboard /></DashBoardProtected>}/>
+              <Route path="/reports" element={<PublicAllReports />} />
           </Routes>
       </BrowserRouter>
       </UserProvider>
