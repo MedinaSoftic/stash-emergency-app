@@ -1,3 +1,4 @@
+// This controller handles user registration and login, including password hashing and JWT token generation. Exposes Rest endpoints
 package com.stash.stash_backend.controller;
 
 import com.stash.stash_backend.dto.AuthResponseDTO;
@@ -19,16 +20,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000") //this allows requests from the React frontend
 public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private JwtSecurity jwtSecurity;
+    private JwtSecurity jwtSecurity; // handles JWT token generation and validation
 
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); // hashes passwords
 
     //endpoint to register a new user
     @PostMapping("/register")
@@ -44,6 +45,7 @@ public class AuthController {
         user.setPassword(encoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
 
+        //Return user info without password
         UserDTO dto = new UserDTO(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
         return ResponseEntity.ok(dto);
     }
@@ -54,7 +56,7 @@ public class AuthController {
         return userRepository.findAll();
     }
 
-    //endpoint to login a user
+    //endpoint to login a existing user
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         Optional<User> userOpt = userRepository.findByEmail(loginRequest.getEmail());
@@ -65,12 +67,13 @@ public class AuthController {
 
     User user = userOpt.get();
     System.out.println("Encoded password: " + user.getPassword());
+    //compare passwords
     if (!encoder.matches(loginRequest.getPassword(), user.getPassword())) {
         System.out.println("Password mismatch!");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
         }
 
-        //Generate a token
+        //Generate a JWT token with user ID and email
         String token = jwtSecurity.generateToken(user.getEmail(), user.getId());
 
         // Return user info and token
