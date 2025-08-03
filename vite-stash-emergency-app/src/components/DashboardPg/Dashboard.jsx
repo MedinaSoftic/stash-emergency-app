@@ -18,7 +18,7 @@ function Dashboard() {
     const [formData, setFormData] = useState({
         type: "",
         description: "",
-        location: "",
+        city: "",
         zipCode: "",
         user: null,
     });
@@ -35,7 +35,7 @@ function Dashboard() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formData.type || !formData.description || !formData.location || !formData.zipCode) {
+        if (!formData.type || !formData.description || !formData.city || !formData.zipCode) {
             alert("Please fill in all fields.");
             return;
         }
@@ -78,7 +78,7 @@ function Dashboard() {
         setFormData({
             type: "",
             description: "",
-            location: "",
+            city: "",
             zipCode: ""
         });
         setIsEditing(false);
@@ -107,7 +107,7 @@ function Dashboard() {
         </select>
         <div className="inputDiv">
             <textarea className="Description" placeholder="Description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
-            <input className="Location" placeholder="Location" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} />
+            <input className="City" placeholder="City" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} />
             <input className="Zipcode" placeholder="Zip Code" value={formData.zipCode} onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })} />
         </div>
         <button type="submit">Submit Report</button>
@@ -117,17 +117,19 @@ function Dashboard() {
       <ul>
         {reports.map((report) => (
             <li key={report.id}>
-                <strong>{report.type}</strong>: {report.description} — {report.location} ({report.zipCode})
+                <strong>{report.type}</strong>: {report.description} — {report.city} ({report.zipCode})
+                {/* Edit button pre fills form for editing */}
                 <button onClick={() => {
                     setFormData({
                         type: report.type,
                         description: report.description,
-                        location: report.location,
+                        city: report.city,
                         zipCode: report.zipCode
                 });
                 setIsEditing(true);
                 setEditId(report.id);
             }} className="editBttn">Edit</button>
+            {/*Delete button triggers axios DELETE request from backend*/}
             <button onClick={() => {
                 axios.delete(`http://localhost:8080/api/reports/${report.id}`)
                     .then(() => {
@@ -138,7 +140,7 @@ function Dashboard() {
             </li>
         ))}
       </ul>
-
+        {/*Logout clears session and redirects user to main sign in*/}
       <div className="logoutContainer">
         <button onClick={handleLogout} className="logoutBtn">Logout</button>
       </div>
