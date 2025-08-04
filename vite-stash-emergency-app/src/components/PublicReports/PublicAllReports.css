@@ -1,0 +1,17 @@
+.allReportsContainer {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.allReportsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.allReportsList li {
+  background: #f3f3f3;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #004e89;
+}

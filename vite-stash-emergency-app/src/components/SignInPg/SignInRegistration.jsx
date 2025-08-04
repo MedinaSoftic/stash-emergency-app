@@ -1,0 +1,112 @@
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router";
+import axios from "axios";
+import LinkButton from "../LinkButton";
+import { FaUser } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
+import "./SignInRegistration.css"
+import { useUser } from "../User/UserContext";
+
+
+
+export default function SignIn() {
+
+    const navigate = useNavigate(); //redirects to dashboard after login
+    const [register, setRegister] = useState("Sign Up"); // toggle between sign up and login
+    const { setUser } = useUser(); //method to update user context after login
+
+    const[formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+
+
+    // handles changes to form input field
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    //Submission for both sign up and login 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            let response;
+            if (register === "Sign Up") {
+                // Sends data to /register endpoint
+                console.log("Sending formData:", formData);
+                response = await axios.post("http://localhost:8080/api/auth/register", formData);
+            } else {
+                // Sends credentials to /login endpoint
+                response = await axios.post("http://localhost:8080/api/auth/login", {
+                    email: formData.email,
+                    password: formData.password,
+                });
+            }
+
+            const {token, user} = response.data;
+            // saves token in local storage and set default header for all axios requests 
+            localStorage.setItem("token", token);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`; // sets token globally
+            setUser(user);
+            navigate("/dashboard"); 
+        } catch (err) {
+            console.error("Error during auth:", err);
+            alert("Login/Register failed. Check console for details.");
+        }
+    };
+
+    return (
+        <>
+        <form onSubmit={handleSubmit}>
+        <div className="container">
+            <div className="header">
+                <div className="text">{register}</div>
+                <div className="underline"></div>
+            </div>
+            <div className="inputs">
+                <div className="input">
+                    {/* Only show Name input on sign up mode*/}
+                    {register === "Login" ? <div></div> : (
+                    <div>
+                        <div className="img"><span><FaUser /></span></div>
+                        <input type="text" placeholder="Name" name="name" onChange={handleChange}/>
+                    </div>
+                    )}
+                </div>
+                {/*Email input */}
+                <div className="input">
+                    <div className="img"><span><MdEmail /></span></div>
+                    <input type="email" placeholder="Email" name="email" onChange={handleChange}/>
+                </div>
+                {/*Pass */}
+                <div className="input">
+                    <div className="img"><span><RiLockPasswordLine /></span></div>
+                    <input type="password" placeholder="Password" name="password" onChange={handleChange}/>
+                </div>
+            </div>
+            <div className="submit-contaier">
+                <div className={register==="Login"?"Submit gray":"Submit"} onClick={()=>{setRegister("Sign Up")}}>Sign Up</div>
+                <div className={register==="Sign Up"?"Submit gray":"Submit"} onClick={()=>{setRegister("Login")}}>Login</div>
+                {/*Submit button is disabled unless fields are filled in*/}
+            <button 
+                type="submit" 
+                className="Submit"
+                disabled={!formData.email || !formData.password || (register !== "Login" && !formData.name)}>
+                Submit
+            </button>
+            </div>
+        </div>
+        </form>
+                <LinkButton to="/" btnClass= "homeBtn" label="Home" imgClass="homeImg" imgSrc="/img/homeButton.png" imgalt="Home Button"/>
+                <LinkButton to="/plan" btnClass= "planBtn" label="Plan Ahead" imgClass="planImg" imgSrc="/img/planButton.png" imgalt="Plan Button"/>
+                <LinkButton to="/contact" btnClass= "contactBtn" label="Contact Resources" imgClass="contactImg" imgSrc="/img/contactButton.png" imgalt="Contact Button"/>
+                <LinkButton to="/about" btnClass="aboutBtn" label="About" imgClass="aboutImg" imgSrc="/img/aboutButton.png" imgalt="About button" />
+                
+        </>
+    )
+}

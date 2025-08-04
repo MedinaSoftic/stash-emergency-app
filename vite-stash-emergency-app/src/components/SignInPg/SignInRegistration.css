@@ -1,0 +1,75 @@
+.container{
+    background-color: whitesmoke;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bolder;
+    font-weight: 800;
+    font-size: 50px;
+}
+.underline{
+    align-items: center;
+    width: 350px;
+    height: 5px;
+    background-color: #046b99;
+    border-radius: 8px;
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    gap: 10px;
+}
+.input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+.inputs .input .img span{
+    padding-bottom: 3px;
+    margin: auto;
+}
+.input input{
+    height: 50px;
+    width: 300px;
+    border: none;
+    font-size: larger;
+}
+/* need to target just the password due to how css reacts with at password type box.  */
+input[type="Password"]::placeholder {
+    padding-left: 20px;
+}
+
+.submit-contaier{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;   
+}
+
+.Submit{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 220px;
+    height: 59px;
+    background-color: #046b99;
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.submit:disabled {
+  background-color: #9bdaf1;
+  cursor: not-allowed;
+}
+
+.gray{
+    background: #9bdaf1;
+    color: #aeb0b5;
+}

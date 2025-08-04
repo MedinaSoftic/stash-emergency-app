@@ -60,7 +60,7 @@ export default function Contact() {
                             <div className="cardInfo">          
                             <p>USA.Gov provides many sources of financial stability for people in need after a Natural disaster.</p>
                             <p>You can find Food benifits using <a href="https://www.usa.gov/disaster-food-help">D-SNAP.</a></p>
-                            <p>There are is also some financial help with <a href="https://www.usa.gov/disaster-help-with-bills">bills.</a>Mortage help and repair <a href="https://www.usa.gov/disaster-mortgage">loans.</a></p>
+                            <p>There is also some financial help with <a href="https://www.usa.gov/disaster-help-with-bills">bills.</a>Mortage help and repair <a href="https://www.usa.gov/disaster-mortgage">loans.</a></p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@ export default function Contact() {
                             <div className="back">
                                 <ContactCard title="Red Cross" number="1-800-733-2767" email="customercare@redcross.org" mail="430 17th Street, NW, Washington, DC 20006"></ContactCard>
                                 <div className="cardInfo">     
-                                <p>Red Cross can help with the reunification of Family in the US and US Territories, after a natural disaster. For guidence visit their <a href="https://www.redcross.org/get-help/disaster-relief-and-recovery-services/contact-and-locate-loved-ones.html">Contact Loved Ones.</a></p>
+                                <p>Red Cross can help with the reunification of Family in the US and US Territories, after a natural disaster. For guidance visit their <a href="https://www.redcross.org/get-help/disaster-relief-and-recovery-services/contact-and-locate-loved-ones.html">Contact Loved Ones.</a></p>
                                 </div>
                             </div>
                         </div>

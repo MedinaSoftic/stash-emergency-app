@@ -7,19 +7,16 @@ import founderImg from "/img/founder.jpeg";
 export default function About() {
 
 
-
 return(
     <>
     <div className="pg">   
     <h4>ABOUT OUR SERVICES</h4>
     <p>
-        STASH Emergency is a free online hub to assist people in preproration for natural disasters such as Tornados,
-        Earthquakes, and Wildfires. People can get cought off guard and be unprepared for these disasters 
-        so a centralized location for logging supplies, understanding the tools availible and knowing the
-        proper saftey protocalls is important. People who prepare are more likley have less issues during
-        these unpredicaple situations. We source our information from reputable and trusted sources such as
-        FEMA, USA.Gov and Red Cross and bring it to one centralized location. You can learn more about these
-        sources in the Contact Resources section.
+        STASH Emergency is a free online hub to assist people in preproration for natural disasters such as Tornados, Earthquakes, 
+        and Wildfires. People can get cought off guard and be unprepared for these disasters so a centralized location for logging supplies, 
+        understanding the tools availible and knowing the proper saftey protocalls is important. People who prepare are more likley 
+        have less issues during these unpredictable situations. We source our information from reputable and trusted sources such as FEMA, 
+        USA.Gov and Red Cross and bring it to one centralized location. You can learn more about these sources in the Contact Resources section.
     </p>
     <p>
         Don't take a chance of being unprepared and start to STASH
