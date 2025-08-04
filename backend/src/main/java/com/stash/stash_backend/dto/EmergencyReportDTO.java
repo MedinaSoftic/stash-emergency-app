@@ -1,9 +1,11 @@
+// This Data transfer object (DTO) is used to expose selected data from EmergencyReport entity to clients, ensuring encapsulation and security.
 package com.stash.stash_backend.dto;
 
 import com.stash.stash_backend.model.EmergencyReport;
 
 import java.time.LocalDateTime;
 
+//Fields included in the DTO to be sent to client
 public class EmergencyReportDTO {
     private Long id;
     private String type;
@@ -12,6 +14,7 @@ public class EmergencyReportDTO {
     private String zipCode;
     private LocalDateTime timestamp;
 
+    // Converts an EmergencyReport entity to an EmergencyReportDTO
     public static EmergencyReportDTO fromEntity(EmergencyReport report) {
         EmergencyReportDTO dto = new EmergencyReportDTO();
         dto.setId(report.getId());
