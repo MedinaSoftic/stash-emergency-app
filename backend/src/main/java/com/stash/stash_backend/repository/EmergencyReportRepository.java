@@ -1,3 +1,5 @@
+// Handles database interactions for EmergencyReport entities, including custom queries to find reports by user ID or zip code.
+// It extends JpaRepository to inherit standard CRUD operations.
 package com.stash.stash_backend.repository;
 
 import com.stash.stash_backend.model.EmergencyReport;
