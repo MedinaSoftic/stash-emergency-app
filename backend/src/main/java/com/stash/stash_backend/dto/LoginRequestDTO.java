@@ -1,3 +1,4 @@
+// This DTO is used to receive user Login requests containing email and password from frontend.
 package com.stash.stash_backend.dto;
 
 public class LoginRequestDTO {
