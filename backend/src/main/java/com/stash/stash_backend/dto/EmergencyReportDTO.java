@@ -10,7 +10,7 @@ public class EmergencyReportDTO {
     private Long id;
     private String type;
     private String description;
-    private String location;
+    private String city;
     private String zipCode;
     private LocalDateTime timestamp;
 
@@ -20,7 +20,7 @@ public class EmergencyReportDTO {
         dto.setId(report.getId());
         dto.setType(report.getType());
         dto.setDescription(report.getDescription());
-        dto.setLocation(report.getLocation());
+        dto.setCity(report.getCity());
         dto.setZipCode(report.getZipCode());
         dto.setTimestamp(report.getTimestamp());
         return dto;
@@ -50,12 +50,12 @@ public class EmergencyReportDTO {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getZipCode() {

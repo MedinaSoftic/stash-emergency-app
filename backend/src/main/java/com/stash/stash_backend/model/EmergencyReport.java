@@ -1,25 +1,26 @@
+// This class represents an emergency report entity in the system.
 package com.stash.stash_backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity // Indicates that this class is a JPA entity
 public class EmergencyReport {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Primary key for the EmergencyReport entity
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto generates the ID
     private Long id;
 
     private String type;
     private String description;
-    private String location;
+    private String city;
     private String zipCode;
     private LocalDateTime timestamp = LocalDateTime.now();
 
-   @ManyToOne
-   @JoinColumn(name = "user_id")
-   @JsonBackReference
+   @ManyToOne // Many reports can be associated with one user
+   @JoinColumn(name = "user_id") // Foreign key column in EmergencyReport table to reference User
+   @JsonBackReference // Prevents infinite recursion during JSON serialization
    private User user;
 
     public String getType() {
@@ -54,12 +55,12 @@ public class EmergencyReport {
         this.zipCode = zipCode;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public LocalDateTime getTimestamp() {

@@ -66,7 +66,7 @@ public class EmergencyReportController {
         EmergencyReport report = emergencyReportRepository.findById(id).orElseThrow();
         report.setType(updatedReport.getType());
         report.setDescription(updatedReport.getDescription());
-        report.setLocation(updatedReport.getLocation());
+        report.setCity(updatedReport.getCity());
         report.setZipCode(updatedReport.getZipCode());
         return emergencyReportRepository.save(report);
     }

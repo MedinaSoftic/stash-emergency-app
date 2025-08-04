@@ -1,3 +1,4 @@
+//This class is used to safely expose non-sensitive user data to the frontend (like id, name, and email), avoiding exposing passwords.
 package com.stash.stash_backend.dto;
 
 public class UserDTO {
@@ -7,6 +8,7 @@ public class UserDTO {
 
     public UserDTO() {}
 
+    // Constructor to initialize UserDTO with id, name, and email
     public UserDTO(Long id, String name, String email) {
         this.id = id;
         this.name = name;
