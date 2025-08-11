@@ -39,6 +39,11 @@ function Dashboard() {
             alert("Please fill in all fields.");
             return;
         }
+        // alert for user to add digits only
+        if (!/^\d{5}$/.test(formData.zipCode)) {
+        alert("Zip code must be exactly 5 digits.");
+        return;
+        }
 
         if (!user?.id) {
             console.error("User not available");
@@ -108,7 +113,7 @@ function Dashboard() {
         <div className="inputDiv">
             <textarea className="Description" placeholder="Description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
             <input className="City" placeholder="City" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} />
-            <input className="Zipcode" placeholder="Zip Code" value={formData.zipCode} onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })} />
+            <input className="Zipcode" placeholder="Zip Code" value={formData.zipCode} maxLength={5} onChange={(e) => { const onlyDigits = e.target.value.replace(/\D/g, "").slice(0, 5); setFormData({ ...formData, zipCode: onlyDigits })}} />
         </div>
         <button type="submit">Submit Report</button>
       </form>
