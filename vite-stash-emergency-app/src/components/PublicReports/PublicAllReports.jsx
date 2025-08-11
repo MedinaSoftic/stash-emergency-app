@@ -20,7 +20,7 @@ function PublicAllReports() {
         {/*Iterates through the reports array, and displays each report */}
         {reports.map((report) => (
           <li key={report.id}>
-            <strong>{report.type}</strong>: {report.description} — {report.location} ({report.zipCode})
+            <strong>{report.type}</strong>: {report.description} — {report.city} ({report.zipCode})
           </li>
         ))}
       </ul>
